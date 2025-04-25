@@ -45,8 +45,8 @@ def retrieve_docs(query: str) -> str:
     
 
 # Define a tool for the agent
-retrieve_tool = FunctionTool(
-    func=retrieve_docs,
+perform_retrieval_tool = FunctionTool.from_defaults(
+    retrieve_docs,
     name="retrieve_docs",
     description="Retrieve documents from the Qdrant vector store based on a query."
 )

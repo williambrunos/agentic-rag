@@ -24,7 +24,7 @@ def get_hub_stats(author: str) -> str:
         return f"Error fetching models for {author}: {str(e)}"
 
 
-hub_stats_tool = FunctionTool.from_defaults(
+check_hub_stats_tool = FunctionTool.from_defaults(
     get_hub_stats,
     name="get_hub_stats",
     description="Fetch the most downloaded model from a specific author on the Hugging Face Hub."
