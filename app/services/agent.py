@@ -4,6 +4,8 @@ from app.tools.check_hub_stats import check_hub_stats_tool
 from app.tools.check_weather import check_weather_tool
 from app.tools.perform_websearch import duckduckgo_search_tool
 from app.tools.perform_retrieval import perform_retrieval_tool
+from app.services.prompts import system_prompt
+
 
 alfred = AgentWorkflow.from_tools_or_functions(
     [
@@ -12,5 +14,6 @@ alfred = AgentWorkflow.from_tools_or_functions(
         duckduckgo_search_tool, 
         perform_retrieval_tool
     ],
-    llm=llm
+    llm=llm,
+    system_prompt=system_prompt["system_prompt"]
 )
