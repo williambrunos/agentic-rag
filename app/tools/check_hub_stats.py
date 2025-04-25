@@ -3,7 +3,7 @@ from huggingface_hub import list_models
 
 def get_hub_stats(author: str) -> str:
     """
-    Fetches the most downloaded model from a specific author on the Hugging Face Hub.
+    Fetches the statistics of a model from a specific author on the Hugging Face Hub.
     
     Args:
         author (str): The author whose models to check.
@@ -27,6 +27,6 @@ def get_hub_stats(author: str) -> str:
 check_hub_stats_tool = FunctionTool.from_defaults(
     get_hub_stats,
     name="get_hub_stats",
-    description="Fetch the most downloaded model from a specific author on the Hugging Face Hub."
+    description="Fetches the statistics of a model from a specific author on the Hugging Face Hub."
 )
 
