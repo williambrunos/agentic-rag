@@ -6,7 +6,7 @@ from app.services.agent import alfred
 router = APIRouter(tags=["agent"])
 
 class QueryRequest(BaseModel):
-    query: str
+    question: str
 
 class QueryResponse(BaseModel):
     answer: str
@@ -19,8 +19,11 @@ async def query_agent(request: QueryRequest):
     """
     try:
         result = await alfred.run(request.question)
-        # Extrai o texto da resposta
-        answer = getattr(result, "response", str(result))
+        chat_msg = getattr(result, "response", None)
+        if chat_msg is not None:
+            answer = chat_msg.content or ""
+        else:
+            answer = str(result)
         return QueryResponse(answer=answer)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
