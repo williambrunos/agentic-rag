@@ -1,17 +1,18 @@
-from llama_index.llms.ollama import Ollama
 import os
 from dotenv import load_dotenv
+from llama_index.llms.openai import OpenAI
 
-dotenv_path = os.path.join(os.path.dirname(__file__), '..', '.env')
-load_dotenv(dotenv_path)
+load_dotenv()
 
-MODEL_NAME = os.getenv("LLAMA_MODEL", "llama3.2")
-LLM_TEMPERATURE = float(os.getenv("LLAMA_TEMPERATURE", 0.1))
-REQUEST_LLM_TIMEOUT = float(os.getenv("LLAMA_REQUEST_TIMEOUT", 120.0))
+OPENAI_API_KEY     = os.getenv("OPENAI_API_KEY")
+OPENAI_MODEL       = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")  # ou "gpt-4"
+LLM_TEMPERATURE    = float(os.getenv("LLM_TEMPERATURE", 0.1))
+LLM_MAX_TOKENS     = int(os.getenv("LLM_MAX_TOKENS", 512))
 
 
-llm = Ollama(
-        model=MODEL_NAME,
-        temperature=LLM_TEMPERATURE,
-        request_timeout=REQUEST_LLM_TIMEOUT
+llm = OpenAI(
+    model=OPENAI_MODEL,
+    api_key=OPENAI_API_KEY,
+    temperature=LLM_TEMPERATURE,
+    max_tokens=LLM_MAX_TOKENS
 )
